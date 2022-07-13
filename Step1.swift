@@ -23,6 +23,7 @@ struct Step1View: View {
 					}
 				}
 			}
+			.navigationTitle("Step 1")
 		}
 	}
 }

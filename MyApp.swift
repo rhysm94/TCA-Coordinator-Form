@@ -11,7 +11,9 @@ struct MyApp: App {
 
     var body: some Scene {
         WindowGroup {
-            Step1View(store: store)
+			NavigationView {
+				Step1View(store: store)
+			}
         }
     }
 }
