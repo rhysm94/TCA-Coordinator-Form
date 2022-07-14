@@ -15,24 +15,41 @@ struct FinalScreenView: View {
 		WithViewStore(store) { viewStore in
 			Form {
 				Section {
-					LabelledRow("First name") {
-						Text(viewStore.firstName)
+					Button {
+						viewStore.send(.returnToName)
+					} label: {
+						LabelledRow("First name") {
+							Text(viewStore.firstName)
+						}
 					}
 
-					LabelledRow("Last Name") {
-						Text(viewStore.lastName)
+					Button {
+						viewStore.send(.returnToName)
+					} label: {
+						LabelledRow("Last Name") {
+							Text(viewStore.lastName)
+						}
 					}
 
-					LabelledRow("Date of Birth") {
-						Text(viewStore.dateOfBirth, format: .dateTime.day().month().year())
+					Button {
+						viewStore.send(.returnToDateOfBirth)
+					} label: {
+						LabelledRow("Date of Birth") {
+							Text(viewStore.dateOfBirth, format: .dateTime.day().month().year())
+						}
 					}
 
-					LabelledRow("Job") {
-						Text(viewStore.job)
+					Button {
+						viewStore.send(.returnToJob)
+					} label: {
+						LabelledRow("Job") {
+							Text(viewStore.job)
+						}
 					}
 				} header: {
 					Text("Confirm Your Info")
 				}
+				.buttonStyle(.plain)
 
 				Button("Submit") {
 					viewStore.send(.submit)
