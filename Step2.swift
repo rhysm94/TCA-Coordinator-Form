@@ -14,8 +14,17 @@ struct Step2View: View {
 	var body: some View {
 		WithViewStore(store) { viewStore in
 			Form {
-				DatePicker("Date of Birth", selection: viewStore.binding(\.$dateOfBirth))
+				Section {
+					DatePicker(
+						"Date of Birth",
+						selection: viewStore.binding(\.$dateOfBirth),
+						in: ...Date.now,
+						displayedComponents: .date
+					)
 					.datePickerStyle(.graphical)
+				} header: {
+					Text("Date of Birth")
+				}
 			}
 			.navigationTitle("Step 2")
 		}
@@ -24,13 +33,15 @@ struct Step2View: View {
 
 struct Step2View_Previews: PreviewProvider {
 	static var previews: some View {
-		Step2View(
-			store: Store(
-				initialState: Step2State(),
-				reducer: .step2,
-				environment: Step2Environment(mainQueue: .main)
+		NavigationView {
+			Step2View(
+				store: Store(
+					initialState: Step2State(),
+					reducer: .step2,
+					environment: Step2Environment(mainQueue: .main)
+				)
 			)
-		)
+		}
 	}
 }
 
