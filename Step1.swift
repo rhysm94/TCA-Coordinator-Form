@@ -40,7 +40,7 @@ public struct Step1State: Equatable {
 	@BindableState var lastName: String = ""
 }
 
-public enum Step1Action: BindableAction {
+public enum Step1Action: Equatable, BindableAction {
 	case binding(BindingAction<Step1State>)
 	case nextButtonTapped
 }

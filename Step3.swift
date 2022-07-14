@@ -75,7 +75,7 @@ public struct Step3State: Equatable {
 	var occupations: [String] = []
 }
 
-public enum Step3Action {
+public enum Step3Action: Equatable {
 	case getOccupations
 	case receiveOccupations(Result<[String], Never>)
 	case selectOccupation(String)

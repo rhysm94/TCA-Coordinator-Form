@@ -53,7 +53,7 @@ public struct Step2State: Equatable {
 	@BindableState var dateOfBirth: Date = .now
 }
 
-public enum Step2Action: BindableAction {
+public enum Step2Action: Equatable, BindableAction {
 	case binding(BindingAction<Step2State>)
 	case nextButtonTapped
 }
