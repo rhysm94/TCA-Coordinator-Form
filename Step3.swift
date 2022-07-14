@@ -14,26 +14,34 @@ struct Step3View: View {
 	var body: some View {
 		WithViewStore(store) { viewStore in
 			Form {
-				if !viewStore.occupations.isEmpty {
-					List(viewStore.occupations, id: \.self) { occupation in
-						Button {
-							viewStore.send(.selectOccupation(occupation))
-						} label: {
-							HStack {
-								Text(occupation)
+				Section {
+					if !viewStore.occupations.isEmpty {
+						List(viewStore.occupations, id: \.self) { occupation in
+							Button {
+								viewStore.send(.selectOccupation(occupation))
+							} label: {
+								HStack {
+									Text(occupation)
 
-								Spacer()
+									Spacer()
 
-								if let selected = viewStore.selectedOccupation, selected == occupation {
-									Image(systemName: "checkmark")
+									if let selected = viewStore.selectedOccupation, selected == occupation {
+										Image(systemName: "checkmark")
+									}
 								}
 							}
+							.buttonStyle(.plain)
 						}
-						.buttonStyle(.plain)
+					} else {
+						ProgressView()
+							.progressViewStyle(.automatic)
 					}
-				} else {
-					ProgressView()
-						.progressViewStyle(.automatic)
+				} header: {
+					Text("Jobs")
+				}
+
+				Button("Next") {
+					viewStore.send(.nextButtonTapped)
 				}
 			}
 			.onAppear {
@@ -79,6 +87,7 @@ public enum Step3Action: Equatable {
 	case getOccupations
 	case receiveOccupations(Result<[String], Never>)
 	case selectOccupation(String)
+	case nextButtonTapped
 }
 
 struct Step3Environment {
@@ -106,6 +115,9 @@ extension Step3Reducer {
 				state.selectedOccupation = state.selectedOccupation == occupation ? nil : occupation
 			}
 
+			return .none
+
+		case .nextButtonTapped:
 			return .none
 		}
 	}

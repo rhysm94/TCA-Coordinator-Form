@@ -34,6 +34,26 @@ extension AppCoordinatorReducer {
 				state.routes.push(.step3(Step3State()))
 				return .none
 
+			case .routeAction(_, action: .step3(.nextButtonTapped)):
+				// Where can I get this info from? How can I store it in state, when progressing through the steps?
+				state.routes.push(.finalScreen(
+					FinalScreenState(firstName: "Rhys", lastName: "Morgan", dateOfBirth: .now, job: "iOS Developer")
+				))
+
+				return .none
+
+			case .routeAction(_, action: .finalScreen(.returnToName)):
+				state.routes.goBackTo(id: .step1)
+				return .none
+
+			case .routeAction(_, action: .finalScreen(.returnToDateOfBirth)):
+				state.routes.goBackTo(id: .step2)
+				return .none
+
+			case .routeAction(_, action: .finalScreen(.returnToJob)):
+				state.routes.goBackTo(id: .step3)
+				return .none
+
 			default:
 				return .none
 			}

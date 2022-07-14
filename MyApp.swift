@@ -20,6 +20,9 @@ struct MyApp: App {
 						"The Big Cheese"
 					]
 				}
+			},
+			submit: { _ in
+				.task { true }
 			}
 		)
 	)
@@ -31,8 +34,10 @@ struct MyApp: App {
 					CaseLet(state: /AppFlowState.step1, action: AppFlowAction.step1, then: Step1View.init(store:))
 
 					CaseLet(state: /AppFlowState.step2, action: AppFlowAction.step2, then: Step2View.init(store:))
-					
+
 					CaseLet(state: /AppFlowState.step3, action: AppFlowAction.step3, then: Step3View.init(store:))
+
+					CaseLet(state: /AppFlowState.finalScreen, action: AppFlowAction.finalScreen, then: FinalScreenView.init(store:))
 				}
 			}
         }
