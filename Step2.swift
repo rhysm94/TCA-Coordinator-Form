@@ -25,6 +25,10 @@ struct Step2View: View {
 				} header: {
 					Text("Date of Birth")
 				}
+
+				Button("Next") {
+					viewStore.send(.nextButtonTapped)
+				}
 			}
 			.navigationTitle("Step 2")
 		}
